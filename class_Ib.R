@@ -1,0 +1,68 @@
+getwd()
+# 1. Set Working Directory
+setwd("D:/AI_Omics_Internship_2025")   
+# ---------------------------------------------------------------------------
+# 2. Create Project Folder
+#press file then new project then new directory then new project then type directory name "Module_I" and path
+
+# Inside the project directory, create the following subfolders using R code:
+# raw_data, clean_data, scripts, results or Tasks, plots etc
+dir.create("raw_data")     
+dir.create("clean_data")   
+dir.create("scripts")  
+dir.create("results")
+dir.create("plots")
+# ---------------------------------------------------------------------------
+# 3. Download "patient_info.csv" dataset from GitHub repository
+# load the dataset into your R environment
+data = read.csv("raw_data/patient_info.csv")
+
+# Inspect the structure of the dataset using appropriate R functions
+str(data)
+
+# Identify variables with incorrect or inconsistent data types.
+# gender 
+## diagnosis
+### smoker
+
+# Convert variables to appropriate data types where needed
+# convert gender into factor
+data$gender_fact = as.factor(data$gender)
+class(data$gender_fact)
+
+# Reorder factor levels manually
+data$gender_fact_manual = factor(data$gender_fact, 
+                                 levels = c("Male", "Female"))
+levels(data$gender_fact_manual)
+
+# convert gender_factor into numeric using factor function
+data$gender_num <- factor(data$gender_fact,
+                          levels = c("Male", "Female"),
+                          labels = c(0, 1)) 
+str(data)
+##################
+## convert diagnosis into factor
+data$diagnosis_fact = as.factor(data$diagnosis)
+
+# Convert factor to numeric using ifelse statement (Cancer = 1, Normal = 0)
+data$diagnosis_num = ifelse(data$diagnosis_fact == "Cancer", 1, 0)
+class(data$diagnosis_num)
+
+# Convert numeric diagnosis to factor
+data$diagnosis_num = as.factor(data$diagnosis_num)
+class(data$diagnosis_num)
+str(data)
+##################
+### convert diagnosis into factor
+data$smoker_fact = as.factor(data$smoker)
+##################
+# Create a new variable for smoking status as a binary factor:
+# 1 for "Yes", 0 for "No"
+data$smoking_status= ifelse(data$smoker_fact == "Yes", 1, 0)
+str(data$smoking_status)
+
+# Save the cleaned dataset in your clean_data folder with the name patient_info_clean.csv
+write.csv(data, "clean_data/patient_info_clean.csv")
+# Save your R script in your script folder with name "class_Ib"
+# ctrl + s 
+# Upload "class_Ib" R script into your GitHub repository
