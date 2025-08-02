@@ -58,9 +58,11 @@ data$smoker_fact = as.factor(data$smoker)
 ##################
 # Create a new variable for smoking status as a binary factor:
 # 1 for "Yes", 0 for "No"
-smoking_status= ifelse(data$smoker_fact == "Yes", 1, 0)
-str(smoking_status)
+data$smoking_status= ifelse(data$smoker_fact == "Yes", 1, 0)
+str(data$smoking_status)
 
 # Save the cleaned dataset in your clean_data folder with the name patient_info_clean.csv
 write.csv(data, "clean_data/patient_info_clean.csv")
+# Save the entire R workspace
+save.image(file = "Logykhaled_Class_Ib_Assignment.RData")
 
