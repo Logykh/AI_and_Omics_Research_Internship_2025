@@ -63,6 +63,3 @@ str(data$smoking_status)
 
 # Save the cleaned dataset in your clean_data folder with the name patient_info_clean.csv
 write.csv(data, "clean_data/patient_info_clean.csv")
-# Save your R script in your script folder with name "class_Ib"
-# ctrl + s 
-# Upload "class_Ib" R script into your GitHub repository
