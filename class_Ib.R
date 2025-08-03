@@ -35,11 +35,12 @@ data$gender_fact_manual = factor(data$gender_fact,
                                  levels = c("Male", "Female"))
 levels(data$gender_fact_manual)
 
-# convert gender_factor into numeric using factor function
-data$gender_num <- factor(data$gender_fact,
-                          levels = c("Male", "Female"),
-                          labels = c(0, 1)) 
+# convert gender_factor into numeric using ifelse function
+data$gender_num <- ifelse(data$gender_fact == "Male", 0 , 1)
+class(data$gender_num)
 str(data)
+data$gender_num <- as.factor(data$gender_num)
+class(data$gender_num)
 ##################
 ## convert diagnosis into factor
 data$diagnosis_fact = as.factor(data$diagnosis)
@@ -63,6 +64,6 @@ str(data$smoking_status)
 
 # Save the cleaned dataset in your clean_data folder with the name patient_info_clean.csv
 write.csv(data, "clean_data/patient_info_clean.csv")
+
 # Save the entire R workspace
 save.image(file = "Logykhaled_Class_Ib_Assignment.RData")
-
