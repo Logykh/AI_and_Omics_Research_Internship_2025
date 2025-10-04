@@ -1,22 +1,17 @@
 # Load Required Libraries
-library(GEOquery)             # Download GEO datasets (series matrix, raw CEL files)
-library(affy)                 # Pre-processing of Affymetrix microarray data (RMA normalization)
-library(arrayQualityMetrics)  # QC reports for microarray data
-library(dplyr)                # Data manipulation
+library(GEOquery)             
+library(affy)                 
+library(arrayQualityMetrics)  
+library(dplyr)                
 gse_data <- getGEO("GSE16515", GSEMatrix = TRUE)
 
 # Extract expression data matrix (genes/probes × samples)
-# Rows corresponds to probes and columns corresponds to samples
 expression_data <- exprs(gse_data$GSE16515_series_matrix.txt.gz)
 
-
 # Extract feature (probe annotation) data
-# Rows corresponds to probes and columns corresponds to samples
 feature_data <-  fData(gse_data$GSE16515_series_matrix.txt.gz)
 
-
 # Extract phenotype (sample metadata) data
-# Rows corresponds to samples and columns corresponds to probes
 phenotype_data <-  pData(gse_data$GSE16515_series_matrix.txt.gz)
 
 # Check missing values in sample annotation
@@ -40,7 +35,7 @@ arrayQualityMetrics(expressionset = raw_data,
 normalized_data <- rma(raw_data)
 
 # QC after data normalization 
-arrayQualityMetrics(expressionset = normalized_data[, c()],
+arrayQualityMetrics(expressionset = normalized_data,
                     outdir = "Results/QC_Normalized_Data",
                     force = TRUE)
 
@@ -82,3 +77,4 @@ class(phenotype_data$source_name_ch1)
 groups <- factor(phenotype_data$source_name_ch1)
 class(groups)
 levels(groups)
+
