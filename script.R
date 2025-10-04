@@ -5,6 +5,7 @@ library(arrayQualityMetrics)  # QC reports for microarray data
 library(dplyr)                # Data manipulation
 gse_data <- getGEO("GSE16515", GSEMatrix = TRUE)
 
+
 # Extract expression data matrix (genes/probes × samples)
 # Rows corresponds to probes and columns corresponds to samples
 expression_data <- exprs(gse_data$GSE16515_series_matrix.txt.gz)
@@ -82,3 +83,4 @@ class(phenotype_data$source_name_ch1)
 groups <- factor(phenotype_data$source_name_ch1)
 class(groups)
 levels(groups)
+
