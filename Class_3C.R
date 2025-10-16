@@ -7,16 +7,14 @@ library(tibble)
 library(ggplot2)
 library(pheatmap)
 # Load preprocessed expression and phenotype data
-raw_data <- ReadAffy(celfile.path = "raw data/CEL_Files")
 load("GSE16515.RData")
 # check annotation
 annotation(raw_data)
-raw_data
 # Display objects available in the annotation package
 ls("package:hgu133plus2.db")
-
 columns(hgu133plus2.db)
 keytypes(hgu133plus2.db)
+
 # Extract probe IDs from processed microarray data
 # -------------------------------------------------------------
 probe_ids <- rownames(processed_data)
@@ -109,9 +107,9 @@ fit_2 <- eBayes(fit_contrast)
 # Extract list of differentially expressed genes (DEGs)
 # -------------------------------------------------------------
 deg_results <- topTable(fit_2,
-                        coef = "Tumor_vs_Normal",  # Specify contrast of interest
-                        number = Inf,               # Return all genes
-                        adjust.method = "BH")       # Benjamini-Hochberg correction
+                        coef = "Tumor_vs_Normal",  
+                        number = Inf,               
+                        adjust.method = "BH")      
 
 # Classify DEGs into Upregulated, Downregulated, or Not Significant
 # -------------------------------------------------------------
@@ -179,3 +177,4 @@ pheatmap(
 )
 
 dev.off()
+
